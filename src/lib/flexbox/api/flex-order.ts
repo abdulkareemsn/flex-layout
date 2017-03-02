@@ -27,29 +27,41 @@ import {MediaMonitor} from '../../media-query/media-monitor';
  */
 @Directive({selector: `
   [fxFlexOrder],
-  [fxFlexOrder.xs],
-  [fxFlexOrder.gt-xs],
-  [fxFlexOrder.sm],
-  [fxFlexOrder.gt-sm],
-  [fxFlexOrder.md],
-  [fxFlexOrder.gt-md],
-  [fxFlexOrder.lg],
-  [fxFlexOrder.gt-lg],
-  [fxFlexOrder.xl]
+  [fxFlexOrder.xs], [fxFlexOrder.sm], [fxFlexOrder.md], [fxFlexOrder.lg], [fxFlexOrder.xl],
+  [fxFlexOrder.lt-sm], [fxFlexOrder.lt-md], [fxFlexOrder.lt-lg], [fxFlexOrder.lt-xl],
+  [fxFlexOrder.gt-xs], [fxFlexOrder.gt-sm], [fxFlexOrder.gt-md], [fxFlexOrder.gt-lg]
 `})
 export class FlexOrderDirective extends BaseFxDirective implements OnInit, OnChanges, OnDestroy {
 
+  /* tslint:disable */
   @Input('fxFlexOrder')       set order(val)     { this._cacheInput('order', val); }
   @Input('fxFlexOrder.xs')    set orderXs(val)   { this._cacheInput('orderXs', val); }
-  @Input('fxFlexOrder.gt-xs') set orderGtXs(val) { this._cacheInput('orderGtXs', val); };
   @Input('fxFlexOrder.sm')    set orderSm(val)   { this._cacheInput('orderSm', val); };
-  @Input('fxFlexOrder.gt-sm') set orderGtSm(val) { this._cacheInput('orderGtSm', val); };
   @Input('fxFlexOrder.md')    set orderMd(val)   { this._cacheInput('orderMd', val); };
-  @Input('fxFlexOrder.gt-md') set orderGtMd(val) { this._cacheInput('orderGtMd', val); };
   @Input('fxFlexOrder.lg')    set orderLg(val)   { this._cacheInput('orderLg', val); };
-  @Input('fxFlexOrder.gt-lg') set orderGtLg(val) { this._cacheInput('orderGtLg', val); };
   @Input('fxFlexOrder.xl')    set orderXl(val)   { this._cacheInput('orderXl', val); };
 
+  @Input('fxFlexOrder.gt-xs') set orderGtXs(val) { this._cacheInput('orderGtXs', val); };
+  @Input('fxFlexOrder.gt-sm') set orderGtSm(val) { this._cacheInput('orderGtSm', val); };
+  @Input('fxFlexOrder.gt-md') set orderGtMd(val) { this._cacheInput('orderGtMd', val); };
+  @Input('fxFlexOrder.gt-lg') set orderGtLg(val) { this._cacheInput('orderGtLg', val); };
+
+  @Input('fxFlexOrder.lt-sm') set orderLtSm(val) { this._cacheInput('orderLtSm', val); };
+  @Input('fxFlexOrder.lt-md') set orderLtMd(val) { this._cacheInput('orderLtMd', val); };
+  @Input('fxFlexOrder.lt-lg') set orderLtLg(val) { this._cacheInput('orderLtLg', val); };
+  @Input('fxFlexOrder.lt-xl') set orderLtXl(val) { this._cacheInput('orderLtXl', val); };
+
+  @Input('fxFlexOrder.handset')           set handset(val)           { this._cacheInput('orderHandset', val); };
+  @Input('fxFlexOrder.handset.landscape') set handsetLandscape(val)  { this._cacheInput('orderHandsetLandscape', val) };
+  @Input('fxFlexOrder.handset.portrait')  set handsetPortrait(val)   { this._cacheInput('orderHandsetPortrait', val); };
+  @Input('fxFlexOrder.tablet')            set tablet(val)            { this._cacheInput('orderTablet', val); };
+  @Input('fxFlexOrder.tablet.landscape')  set tabletLandscape(val)   { this._cacheInput('orderTabletLandscape', val); };
+  @Input('fxFlexOrder.tablet.portrait')   set tabletPortrait(val)    { this._cacheInput('orderTabletPortrait', val); };
+  @Input('fxFlexOrder.web')               set web(val)               { this._cacheInput('orderWeb', val); };
+  @Input('fxFlexOrder.web.landscape')     set webLandscape(val)      { this._cacheInput('orderWebLandscape', val); };
+  @Input('fxFlexOrder.web.portrait')      set webPortrait(val)       { this._cacheInput('orderWebPortrait', val); };
+
+  /* tslint:enable */
   constructor(monitor: MediaMonitor, elRef: ElementRef, renderer: Renderer) {
     super(monitor, elRef, renderer);
   }

@@ -44,12 +44,14 @@ export function negativeOf(hide: any) {
  */
 @Directive({
   selector: `
-  [fxShow],
-  [fxShow.xs],[fxShow.gt-xs],[fxShow.sm],[fxShow.gt-sm],
-  [fxShow.md],[fxShow.gt-md],[fxShow.lg],[fxShow.gt-lg],[fxShow.xl],  
-  [fxHide],
-  [fxHide.xs],[fxHide.gt-xs],[fxHide.sm],[fxHide.gt-sm],
-  [fxHide.md],[fxHide.gt-md],[fxHide.lg],[fxHide.gt-lg],[fxHide.xl]  
+  [fxShow], 
+  [fxShow.xs], [fxShow.sm], [fxShow.md], [fxShow.lg], [fxShow.xl],
+  [fxShow.lt-sm], [fxShow.lt-md], [fxShow.lt-lg], [fxShow.lt-xl], 
+  [fxShow.gt-xs], [fxShow.gt-sm], [fxShow.gt-md], [fxShow.gt-lg],
+  [fxHide], 
+  [fxHide.xs], [fxHide.sm], [fxHide.md], [fxHide.lg], [fxHide.xl],  
+  [fxHide.lt-sm], [fxHide.lt-md], [fxHide.lt-lg], [fxHide.lt-xl],
+  [fxHide.gt-xs], [fxHide.gt-sm], [fxHide.gt-md], [fxHide.gt-lg]
 `
 })
 export class ShowHideDirective extends BaseFxDirective implements OnInit, OnChanges, OnDestroy {
@@ -60,87 +62,62 @@ export class ShowHideDirective extends BaseFxDirective implements OnInit, OnChan
    */
   protected _layoutWatcher: Subscription;
 
+  /* tslint:disable */
+  @Input('fxShow')       set show(val) {  this._cacheInput("show", val);  }
+  @Input('fxShow.xs')    set showXs(val) {this._cacheInput('showXs', val);}
+  @Input('fxShow.sm')    set showSm(val) {this._cacheInput('showSm', val); };
+  @Input('fxShow.md')    set showMd(val) {this._cacheInput('showMd', val); };
+  @Input('fxShow.lg')    set showLg(val) {this._cacheInput('showLg', val); };
+  @Input('fxShow.xl')    set showXl(val) {this._cacheInput('showXl', val); };
 
-  @Input('fxShow')       set show(val) {
-    this._cacheInput("show", val);
-  }
+  @Input('fxShow.lt-sm') set showLtSm(val) { this._cacheInput('showLtSm', val); };
+  @Input('fxShow.lt-md') set showLtMd(val) { this._cacheInput('showLtMd', val); };
+  @Input('fxShow.lt-lg') set showLtLg(val) { this._cacheInput('showLtLg', val); };
+  @Input('fxShow.lt-xl') set showLtXl(val) { this._cacheInput('showLtXl', val); };
 
-  @Input('fxHide')       set hide(val) {
-    this._cacheInput("show", negativeOf(val));
-  }
+  @Input('fxShow.gt-xs') set showGtXs(val) {this._cacheInput('showGtXs', val); };
+  @Input('fxShow.gt-sm') set showGtSm(val) {this._cacheInput('showGtSm', val); };
+  @Input('fxShow.gt-md') set showGtMd(val) {this._cacheInput('showGtMd', val); };
+  @Input('fxShow.gt-lg') set showGtLg(val) {this._cacheInput('showGtLg', val); };
+  
+  @Input('fxShow.handset')           set handset(val)           { this._cacheInput('showHandset', val); };
+  @Input('fxShow.handset.landscape') set handsetLandscape(val)  { this._cacheInput('showHandsetLandscape', val) };
+  @Input('fxShow.handset.portrait')  set handsetPortrait(val)   { this._cacheInput('showHandsetPortrait', val); };
+  @Input('fxShow.tablet')            set tablet(val)            { this._cacheInput('showTablet', val); };
+  @Input('fxShow.tablet.landscape')  set tabletLandscape(val)   { this._cacheInput('showTabletLandscape', val); };
+  @Input('fxShow.tablet.portrait')   set tabletPortrait(val)    { this._cacheInput('showTabletPortrait', val); };
+  @Input('fxShow.web')               set web(val)               { this._cacheInput('showWeb', val); };
+  @Input('fxShow.web.landscape')     set webLandscape(val)      { this._cacheInput('showWebLandscape', val); };
+  @Input('fxShow.web.portrait')      set webPortrait(val)       { this._cacheInput('showWebPortrait', val); };
 
-  @Input('fxShow.xs')    set showXs(val) {
-    this._cacheInput('showXs', val);
-  }
+  @Input('fxHide')       set hide(val) {this._cacheInput("show", negativeOf(val));}
+  @Input('fxHide.xs')    set hideXs(val) {this._cacheInput("showXs", negativeOf(val));}
+  @Input('fxHide.sm')    set hideSm(val) {this._cacheInput('showSm', negativeOf(val)); };
+  @Input('fxHide.md')    set hideMd(val) {this._cacheInput('showMd', negativeOf(val)); };
+  @Input('fxHide.lg')    set hideLg(val) {this._cacheInput('showLg', negativeOf(val)); };
+  @Input('fxHide.xl')    set hideXl(val) {this._cacheInput('showXl', negativeOf(val)); };
 
-  @Input('fxHide.xs')    set hideXs(val) {
-    this._cacheInput("showXs", negativeOf(val));
-  }
+  @Input('fxHide.lt-sm') set hideLtSm(val) { this._cacheInput('showLtSm', negativeOf(val)); };
+  @Input('fxHide.lt-md') set hideLtMd(val) { this._cacheInput('showLtMd', negativeOf(val)); };
+  @Input('fxHide.lt-lg') set hideLtLg(val) { this._cacheInput('showLtLg', negativeOf(val)); };
+  @Input('fxHide.lt-xl') set hideLtXl(val) { this._cacheInput('showLtXl', negativeOf(val)); };
 
-  @Input('fxShow.gt-xs') set showGtXs(val) {
-    this._cacheInput('showGtXs', val);
-  };
+  @Input('fxHide.gt-xs') set hideGtXs(val) {this._cacheInput('showGtXs', negativeOf(val)); };
+  @Input('fxHide.gt-sm') set hideGtSm(val) {this._cacheInput('showGtSm', negativeOf(val)); };
+  @Input('fxHide.gt-md') set hideGtMd(val) {this._cacheInput('showGtMd', negativeOf(val)); };
+  @Input('fxHide.gt-lg') set hideGtLg(val) {this._cacheInput('showGtLg', negativeOf(val)); };
 
-  @Input('fxHide.gt-xs') set hideGtXs(val) {
-    this._cacheInput('showGtXs', negativeOf(val));
-  };
-
-  @Input('fxShow.sm')    set showSm(val) {
-    this._cacheInput('showSm', val);
-  };
-
-  @Input('fxHide.sm')    set hideSm(val) {
-    this._cacheInput('showSm', negativeOf(val));
-  };
-
-  @Input('fxShow.gt-sm') set showGtSm(val) {
-    this._cacheInput('showGtSm', val);
-  };
-
-  @Input('fxHide.gt-sm') set hideGtSm(val) {
-    this._cacheInput('showGtSm', negativeOf(val));
-  };
-
-  @Input('fxShow.md')    set showMd(val) {
-    this._cacheInput('showMd', val);
-  };
-
-  @Input('fxHide.md')    set hideMd(val) {
-    this._cacheInput('showMd', negativeOf(val));
-  };
-
-  @Input('fxShow.gt-md') set showGtMd(val) {
-    this._cacheInput('showGtMd', val);
-  };
-
-  @Input('fxHide.gt-md') set hideGtMd(val) {
-    this._cacheInput('showGtMd', negativeOf(val));
-  };
-
-  @Input('fxShow.lg')    set showLg(val) {
-    this._cacheInput('showLg', val);
-  };
-
-  @Input('fxHide.lg')    set hideLg(val) {
-    this._cacheInput('showLg', negativeOf(val));
-  };
-
-  @Input('fxShow.gt-lg') set showGtLg(val) {
-    this._cacheInput('showGtLg', val);
-  };
-
-  @Input('fxHide.gt-lg') set hideGtLg(val) {
-    this._cacheInput('showGtLg', negativeOf(val));
-  };
-
-  @Input('fxShow.xl')    set showXl(val) {
-    this._cacheInput('showXl', val);
-  };
-
-  @Input('fxHide.xl')    set hideXl(val) {
-    this._cacheInput('showXl', negativeOf(val));
-  };
-
+  @Input('fxHide.handset')           set hide_handset(val)           { this._cacheInput('showHandset', negativeOf(val)); };
+  @Input('fxHide.handset.landscape') set hide_handsetLandscape(val)  { this._cacheInput('showHandsetLandscape', negativeOf(val)); };
+  @Input('fxHide.handset.portrait')  set hide_handsetPortrait(val)   { this._cacheInput('showHandsetPortrait', negativeOf(val)); };
+  @Input('fxHide.tablet')            set hide_tablet(val)            { this._cacheInput('showTablet', negativeOf(val)); };
+  @Input('fxHide.tablet.landscape')  set hide_tabletLandscape(val)   { this._cacheInput('showTabletLandscape', negativeOf(val)); };
+  @Input('fxHide.tablet.portrait')   set hide_tabletPortrait(val)    { this._cacheInput('showTabletPortrait', negativeOf(val)); };
+  @Input('fxHide.web')               set hide_web(val)               { this._cacheInput('showWeb', negativeOf(val)); };
+  @Input('fxHide.web.landscape')     set hide_webLandscape(val)      { this._cacheInput('showWebLandscape', negativeOf(val)); };
+  @Input('fxHide.web.portrait')      set hide_webPortrait(val)       { this._cacheInput('showWebPortrait', negativeOf(val)); };
+  
+  /* tslint:enable */
   /**
    *
    */

@@ -28,59 +28,42 @@ import {MediaMonitor} from '../../media-query/media-monitor';
 @Directive({
   selector: `
   [fxFlexAlign],
-  [fxFlexAlign.xs],
-  [fxFlexAlign.gt-xs],
-  [fxFlexAlign.sm],
-  [fxFlexAlign.gt-sm],
-  [fxFlexAlign.md],
-  [fxFlexAlign.gt-md],
-  [fxFlexAlign.lg],
-  [fxFlexAlign.gt-lg],
-  [fxFlexAlign.xl]
+  [fxFlexAlign.xs], [fxFlexAlign.sm], [fxFlexAlign.md], [fxFlexAlign.lg], [fxFlexAlign.xl],
+  [fxFlexAlign.lt-sm], [fxFlexAlign.lt-md], [fxFlexAlign.lt-lg], [fxFlexAlign.lt-xl],
+  [fxFlexAlign.gt-xs], [fxFlexAlign.gt-sm], [fxFlexAlign.gt-md], [fxFlexAlign.gt-lg]
 `
 })
 export class FlexAlignDirective extends BaseFxDirective implements OnInit, OnChanges, OnDestroy {
 
-  @Input('fxFlexAlign')       set align(val) {
-    this._cacheInput('align', val);
-  }
+  /* tslint:disable */
+  @Input('fxFlexAlign')       set align(val)  { this._cacheInput('align', val);  };
+  @Input('fxFlexAlign.xs')    set alignXs(val)  { this._cacheInput('alignXs', val);  };
+  @Input('fxFlexAlign.sm')    set alignSm(val)  { this._cacheInput('alignSm', val); };
+  @Input('fxFlexAlign.md')    set alignMd(val)  { this._cacheInput('alignMd', val); };
+  @Input('fxFlexAlign.lg')    set alignLg(val)  { this._cacheInput('alignLg', val); };
+  @Input('fxFlexAlign.xl')    set alignXl(val)  { this._cacheInput('alignXl', val); };
 
-  @Input('fxFlexAlign.xs')    set alignXs(val) {
-    this._cacheInput('alignXs', val);
-  }
+  @Input('fxFlexAlign.lt-sm') set alignLtSm(val) { this._cacheInput('alignLtSm', val); };
+  @Input('fxFlexAlign.lt-md') set alignLtMd(val) { this._cacheInput('alignLtMd', val); };
+  @Input('fxFlexAlign.lt-lg') set alignLtLg(val) { this._cacheInput('alignLtLg', val); };
+  @Input('fxFlexAlign.lt-xl') set alignLtXl(val) { this._cacheInput('alignLtXl', val); };
 
-  @Input('fxFlexAlign.gt-xs') set alignGtXs(val) {
-    this._cacheInput('alignGtXs', val);
-  };
+  @Input('fxFlexAlign.gt-xs') set alignGtXs(val)  { this._cacheInput('alignGtXs', val); };
+  @Input('fxFlexAlign.gt-sm') set alignGtSm(val)  { this._cacheInput('alignGtSm', val); };
+  @Input('fxFlexAlign.gt-md') set alignGtMd(val)  { this._cacheInput('alignGtMd', val); };
+  @Input('fxFlexAlign.gt-lg') set alignGtLg(val)  { this._cacheInput('alignGtLg', val); };
 
-  @Input('fxFlexAlign.sm')    set alignSm(val) {
-    this._cacheInput('alignSm', val);
-  };
+  @Input('fxFlexAlign.handset')           set handset(val)           { this._cacheInput('alignHandset', val); };
+  @Input('fxFlexAlign.handset.landscape') set handsetLandscape(val)  { this._cacheInput('alignHandsetLandscape', val) };
+  @Input('fxFlexAlign.handset.portrait')  set handsetPortrait(val)   { this._cacheInput('alignHandsetPortrait', val); };
+  @Input('fxFlexAlign.tablet')            set tablet(val)            { this._cacheInput('alignTablet', val); };
+  @Input('fxFlexAlign.tablet.landscape')  set tabletLandscape(val)   { this._cacheInput('alignTabletLandscape', val); };
+  @Input('fxFlexAlign.tablet.portrait')   set tabletPortrait(val)    { this._cacheInput('alignTabletPortrait', val); };
+  @Input('fxFlexAlign.web')               set web(val)               { this._cacheInput('alignWeb', val); };
+  @Input('fxFlexAlign.web.landscape')     set webLandscape(val)      { this._cacheInput('alignWebLandscape', val); };
+  @Input('fxFlexAlign.web.portrait')      set webPortrait(val)       { this._cacheInput('alignWebPortrait', val); };
 
-  @Input('fxFlexAlign.gt-sm') set alignGtSm(val) {
-    this._cacheInput('alignGtSm', val);
-  };
-
-  @Input('fxFlexAlign.md')    set alignMd(val) {
-    this._cacheInput('alignMd', val);
-  };
-
-  @Input('fxFlexAlign.gt-md') set alignGtMd(val) {
-    this._cacheInput('alignGtMd', val);
-  };
-
-  @Input('fxFlexAlign.lg')    set alignLg(val) {
-    this._cacheInput('alignLg', val);
-  };
-
-  @Input('fxFlexAlign.gt-lg') set alignGtLg(val) {
-    this._cacheInput('alignGtLg', val);
-  };
-
-  @Input('fxFlexAlign.xl')    set alignXl(val) {
-    this._cacheInput('alignXl', val);
-  };
-
+  /* tslint:enable */
   constructor(monitor: MediaMonitor, elRef: ElementRef, renderer: Renderer) {
     super(monitor, elRef, renderer);
   }

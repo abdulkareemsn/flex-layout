@@ -36,34 +36,45 @@ import {LAYOUT_VALUES, LayoutDirective} from './layout';
  *  @see https://css-tricks.com/almanac/properties/a/align-content/
  */
 @Directive({selector: `
-  [fxLayoutAlign],
-  [fxLayoutAlign.xs],
-  [fxLayoutAlign.gt-xs],
-  [fxLayoutAlign.sm],
-  [fxLayoutAlign.gt-sm],
-  [fxLayoutAlign.md],
-  [fxLayoutAlign.gt-md],
-  [fxLayoutAlign.lg],
-  [fxLayoutAlign.gt-lg],
-  [fxLayoutAlign.xl]
+  [fxLayoutAlign], 
+  [fxLayoutAlign.xs], [fxLayoutAlign.sm], [fxLayoutAlign.md], [fxLayoutAlign.lg],[fxLayoutAlign.xl],
+  [fxLayoutAlign.lt-sm], [fxLayoutAlign.lt-md], [fxLayoutAlign.lt-lg], [fxLayoutAlign.lt-xl],
+  [fxLayoutAlign.gt-xs], [fxLayoutAlign.gt-sm], [fxLayoutAlign.gt-md], [fxLayoutAlign.gt-lg]
 `})
 export class LayoutAlignDirective extends BaseFxDirective implements OnInit, OnChanges, OnDestroy {
 
   protected _layout = 'row';  // default flex-direction
   protected _layoutWatcher: Subscription;
 
+  /* tslint:disable */
   @Input('fxLayoutAlign')       set align(val)     { this._cacheInput('align', val); }
   @Input('fxLayoutAlign.xs')    set alignXs(val)   { this._cacheInput('alignXs', val); }
-  @Input('fxLayoutAlign.gt-xs') set alignGtXs(val) { this._cacheInput('alignGtXs', val); };
   @Input('fxLayoutAlign.sm')    set alignSm(val)   { this._cacheInput('alignSm', val); };
-  @Input('fxLayoutAlign.gt-sm') set alignGtSm(val) { this._cacheInput('alignGtSm', val); };
   @Input('fxLayoutAlign.md')    set alignMd(val)   { this._cacheInput('alignMd', val); };
-  @Input('fxLayoutAlign.gt-md') set alignGtMd(val) { this._cacheInput('alignGtMd', val); };
   @Input('fxLayoutAlign.lg')    set alignLg(val)   { this._cacheInput('alignLg', val); };
-  @Input('fxLayoutAlign.gt-lg') set alignGtLg(val) { this._cacheInput('alignGtLg', val); };
   @Input('fxLayoutAlign.xl')    set alignXl(val)   { this._cacheInput('alignXl', val); };
 
+  @Input('fxLayoutAlign.gt-xs') set alignGtXs(val) { this._cacheInput('alignGtXs', val); };
+  @Input('fxLayoutAlign.gt-sm') set alignGtSm(val) { this._cacheInput('alignGtSm', val); };
+  @Input('fxLayoutAlign.gt-md') set alignGtMd(val) { this._cacheInput('alignGtMd', val); };
+  @Input('fxLayoutAlign.gt-lg') set alignGtLg(val) { this._cacheInput('alignGtLg', val); };
 
+  @Input('fxLayoutAlign.lt-sm') set alignLtSm(val) { this._cacheInput('alignLtSm', val); };
+  @Input('fxLayoutAlign.lt-md') set alignLtMd(val) { this._cacheInput('alignLtMd', val); };
+  @Input('fxLayoutAlign.lt-lg') set alignLtLg(val) { this._cacheInput('alignLtLg', val); };
+  @Input('fxLayoutAlign.lt-xl') set alignLtXl(val) { this._cacheInput('alignLtXl', val); };
+
+  @Input('fxLayoutAlign.handset')           set handset(val)           { this._cacheInput('alignHandset', val); };
+  @Input('fxLayoutAlign.handset.landscape') set handsetLandscape(val)  { this._cacheInput('alignHandsetLandscape', val); };
+  @Input('fxLayoutAlign.handset.portrait')  set handsetPortrait(val)   { this._cacheInput('alignHandsetPortrait', val); };
+  @Input('fxLayoutAlign.tablet')            set tablet(val)            { this._cacheInput('alignTablet', val); };
+  @Input('fxLayoutAlign.tablet.landscape')  set tabletLandscape(val)   { this._cacheInput('alignTabletLandscape', val); };
+  @Input('fxLayoutAlign.tablet.portrait')   set tabletPortrait(val)    { this._cacheInput('alignTabletPortrait', val); };
+  @Input('fxLayoutAlign.web')               set web(val)               { this._cacheInput('alignWeb', val); };
+  @Input('fxLayoutAlign.web.landscape')     set webLandscape(val)      { this._cacheInput('alignWebLandscape', val); };
+  @Input('fxLayoutAlign.web.portrait')      set webPortrait(val)       { this._cacheInput('alignWebPortrait', val); };
+
+  /* tslint:enable */
   constructor(
       monitor: MediaMonitor,
       elRef: ElementRef, renderer: Renderer,

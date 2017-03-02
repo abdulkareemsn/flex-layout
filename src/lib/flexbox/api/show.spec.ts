@@ -9,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {BreakPointsProvider} from '../../media-query/breakpoints/break-points';
+import {BreakPointsProvider} from '../../media-query/breakpoints/break-points-provider';
 import {BreakPointRegistry} from '../../media-query/breakpoints/break-point-registry';
 import {MatchMedia} from '../../media-query/match-media';
 import {MockMatchMedia} from '../../media-query/mock/mock-match-media';
@@ -25,6 +25,10 @@ describe('show directive', () => {
   let activateMediaQuery = (alias, enableOverlaps = false) => {
     let matchMedia: MockMatchMedia = fixture.debugElement.injector.get(MatchMedia);
     matchMedia.activate(alias, enableOverlaps);
+  };
+  let useOverlaps = (allowOverlaps) => {
+    let matchMedia: MockMatchMedia = fixture.debugElement.injector.get(MatchMedia);
+    matchMedia.useOverlaps = allowOverlaps;
   };
 
   beforeEach(() => {
@@ -43,6 +47,7 @@ describe('show directive', () => {
   afterEach(() => {
     if (fixture) {
       fixture.debugElement.injector.get(MatchMedia).clearAll();
+
       fixture = null;
     }
   });
@@ -140,12 +145,14 @@ describe('show directive', () => {
               ...content
             </div>
         `);
+
+      useOverlaps(true);
       expectNativeEl(fixture).toHaveCssStyle({'display': 'none'});
 
-      activateMediaQuery('xs', true);
+      activateMediaQuery('xs');
       expectNativeEl(fixture).toHaveCssStyle({'display': 'block'});
 
-      activateMediaQuery('gt-md', true);
+      activateMediaQuery('gt-md');
       expectNativeEl(fixture).toHaveCssStyle({'display': 'none'});
     });
 
@@ -155,6 +162,7 @@ describe('show directive', () => {
         <div [fxShow.xs]="!isHidden" style="display:inline-block"></div>
       `);
       fixture.componentInstance.isHidden = false;
+
       expectNativeEl(fixture).toHaveCssStyle(visibleStyle);
 
       // should hide with this activation and setting
@@ -204,16 +212,18 @@ describe('show directive', () => {
 
     it('should support hide and show', () => {
       fixture = createTestComponent(`
-          <div fxHide fxShow.gt-sm>
+          <div fxHide fxShow.gt-md>
             This content to be shown ONLY when gt-sm
           </div>
        `);
+      useOverlaps(true);
+
       expectNativeEl(fixture).toHaveCssStyle({'display': 'none'});
 
-      activateMediaQuery('md', true);
+      activateMediaQuery('lg');
       expectNativeEl(fixture).toHaveCssStyle({'display': 'block'});
 
-      activateMediaQuery('xs', true);
+      activateMediaQuery('sm');
       expectNativeEl(fixture).toHaveCssStyle({'display': 'none'});
     });
   });
